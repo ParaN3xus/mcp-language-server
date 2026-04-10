@@ -18,6 +18,12 @@ type match struct {
 }
 
 func identifyOverlappingSymbols(ctx context.Context, client *lsp.Client, startLocation protocol.Location) ([]match, error) {
+	// Some servers (notably clangd) require the target document to have been
+	// added via didOpen before documentSymbol can build an AST for it.
+	if err := client.OpenFile(ctx, startLocation.URI.Path()); err != nil {
+		return nil, fmt.Errorf("failed to open document for symbols: %w", err)
+	}
+
 	symParams := protocol.DocumentSymbolParams{
 		TextDocument: protocol.TextDocumentIdentifier{
 			URI: startLocation.URI,
