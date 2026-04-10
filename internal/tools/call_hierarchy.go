@@ -58,6 +58,11 @@ func getCallHierarchy(
 
 		// Get the location of the symbol
 		loc := symbol.GetLocation()
+		err := client.OpenFile(ctx, loc.URI.Path())
+		if err != nil {
+			result.WriteString(fmt.Sprintf("%s: Error opening file: %v\n", symbol.GetName(), err))
+			continue
+		}
 
 		chParams := protocol.CallHierarchyPrepareParams{
 			TextDocumentPositionParams: protocol.TextDocumentPositionParams{
