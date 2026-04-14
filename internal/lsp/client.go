@@ -128,7 +128,7 @@ func (c *Client) InitializeLSPClient(ctx context.Context, workspaceDir string) (
 			ProcessID: int32(os.Getpid()),
 			ClientInfo: &protocol.ClientInfo{
 				Name:    "mcp-language-server",
-				Version: "0.1.0",
+				Version: "0.0.3",
 			},
 			RootPath: workspaceDir,
 			RootURI:  protocol.DocumentUri("file://" + workspaceDir),

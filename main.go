@@ -162,7 +162,7 @@ func (s *mcpServer) start() error {
 
 	s.mcpServer = server.NewMCPServer(
 		"MCP Language Server",
-		"v0.0.2",
+		"v0.0.3",
 		server.WithLogging(),
 		server.WithRecovery(),
 	)
